@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Прогресс</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background: #FF7663;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Letters Animation */
+        .floating-letters {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .letter {
+            position: absolute;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 120px;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .letter:nth-child(1) { color: #FFE9EE; left: 10%; top: 20%; animation-delay: 0s; animation-duration: 25s; }
+        .letter:nth-child(2) { color: #FFF1E5; left: 25%; top: 60%; animation-delay: 2s; animation-duration: 30s; }
+        .letter:nth-child(3) { color: #F1ECFF; left: 40%; top: 80%; animation-delay: 4s; animation-duration: 22s; }
+        .letter:nth-child(4) { color: #DFEFFF; left: 55%; top: 40%; animation-delay: 1s; animation-duration: 28s; }
+        .letter:nth-child(5) { color: #FEE2DF; left: 70%; top: 90%; animation-delay: 3s; animation-duration: 26s; }
+        .letter:nth-child(6) { color: #FFAFA4; left: 85%; top: 30%; animation-delay: 5s; animation-duration: 24s; }
+        .letter:nth-child(7) { color: #FFE9EE; left: 15%; top: 70%; animation-delay: 6s; animation-duration: 27s; }
+        .letter:nth-child(8) { color: #FFF1E5; left: 35%; top: 15%; animation-delay: 7s; animation-duration: 23s; }
+        .letter:nth-child(9) { color: #F1ECFF; left: 60%; top: 65%; animation-delay: 8s; animation-duration: 29s; }
+        .letter:nth-child(10) { color: #DFEFFF; left: 80%; top: 50%; animation-delay: 2.5s; animation-duration: 25s; }
+        .letter:nth-child(11) { color: #FEE2DF; left: 5%; top: 45%; animation-delay: 4.5s; animation-duration: 31s; }
+        .letter:nth-child(12) { color: #FFAFA4; left: 50%; top: 85%; animation-delay: 6.5s; animation-duration: 21s; }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        /* Main Content */
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* Logo */
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            color: #370B27;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        /* Goal Text */
+        .goal-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: #370B27;
+            margin-bottom: 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 15px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+
+        /* Progress Bar Container */
+        .progress-container {
+            width: 90%;
+            max-width: 800px;
+            margin-top: 20px;
+        }
+
+        .progress-wrapper {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+        }
+
+        .progress-label {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #370B27;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .progress-percentage {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #370B27;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 1.31%; /* ИЗМЕНИТЕ ЭТО ЗНАЧЕНИЕ ДЛЯ ИЗМЕНЕНИЯ ПРОГРЕССА */
+            background: linear-gradient(90deg, 
+                #FFE9EE 0%, 
+                #FFF1E5 20%, 
+                #F1ECFF 40%, 
+                #DFEFFF 60%, 
+                #FEE2DF 80%, 
+                #FFAFA4 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+            border-radius: 30px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 175, 164, 0.6);
+            transition: width 1s ease-out;
+        }
+
+        .progress-fill::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg,
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0%;
+            }
+            100% {
+                background-position: 0% 0%;
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* Info Box */
+        .info-box {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-align: center;
+        }
+
+        .info-text {
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 16px;
+            color: #370B27;
+            line-height: 1.6;
+        }
+
+        .amount {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #370B27;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 32px;
+                padding: 15px 25px;
+            }
+
+            .goal-text {
+                font-size: 22px;
+                padding: 12px 20px;
+            }
+
+            .letter {
+                font-size: 80px;
+            }
+
+            .progress-bar {
+                height: 50px;
+            }
+
+            .progress-percentage {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Letters Background -->
+    <div class="floating-letters">
+        <div class="letter">М</div>
+        <div class="letter">А</div>
+        <div class="letter">М</div>
+        <div class="letter">А</div>
+        <div class="letter">М</div>
+        <div class="letter">А</div>
+        <div class="letter">М</div>
+        <div class="letter">А</div>
+        <div class="letter">М</div>
+        <div class="letter">А</div>
+        <div class="letter">М</div>
+        <div class="letter">А</div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="progress-container">
+            <div class="progress-wrapper">
+                <div class="progress-label">
+                    <span>Прогресс</span>
+                    <span class="progress-percentage" id="percentage">1.31%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-text">Текущий результат</div>
+                <div class="amount" id="currentAmount">16 364 077 ₽</div>
+            </div>
+
+            <div class="info-box" style="margin-top: 15px;">
+                <div class="info-text">Цель</div>
+                <div class="amount">1 250 000 000 ₽</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // URL вашего Google Apps Script
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-Dt1aBRTw8shTrLC_jIogx8EFttG0IIWO1I1dE3glseSuYiDQWVcwps4569dvgr7t/exec';
+        
+        // Функция для получения данных из Google Sheets через Apps Script
+        async function fetchSheetData() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                
+                const numericValue = parseFloat(data.value);
+                
+                if (!isNaN(numericValue)) {
+                    // Рассчитываем процент от цели
+                    const totalGoal = 1250000000;
+                    const percentage = (numericValue / totalGoal * 100).toFixed(2);
+                    
+                    // Обновляем прогресс
+                    updateProgress(parseFloat(percentage));
+                    
+                    console.log('✅ Данные обновлены из Google Sheets:', numericValue);
+                } else {
+                    console.error('Не удалось распарсить значение из таблицы');
+                    updateProgress(1.31);
+                }
+            } catch (error) {
+                console.error('Ошибка при загрузке данных из Google Sheets:', error);
+                // В случае ошибки используем последнее известное значение
+                updateProgress(1.31);
+            }
+        }
+        
+        // Функция для обновления прогресса
+        function updateProgress(percentage) {
+            const progressFill = document.getElementById('progressFill');
+            const percentageText = document.getElementById('percentage');
+            const currentAmount = document.getElementById('currentAmount');
+            
+            // Обновляем визуальный прогресс
+            progressFill.style.width = percentage + '%';
+            percentageText.textContent = percentage + '%';
+            
+            // Рассчитываем текущую сумму (1 250 000 000 * процент)
+            const totalGoal = 1250000000;
+            const current = totalGoal * (percentage / 100);
+            currentAmount.textContent = current.toLocaleString('ru-RU', {maximumFractionDigits: 2}) + ' ₽';
+        }
+
+        // Загружаем данные при загрузке страницы
+        fetchSheetData();
+        
+        // Обновляем данные каждые 30 секунд
+        setInterval(fetchSheetData, 30000);
+    </script>
+</body>
+</html>
